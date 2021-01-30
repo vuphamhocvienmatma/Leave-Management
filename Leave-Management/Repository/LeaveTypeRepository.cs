@@ -24,6 +24,7 @@ namespace Leave_Management.Repository
         public bool Delete(LeaveType entity)
         {
             _db.LeaveTypes.Remove(entity);
+            return Save();
         }
 
         public ICollection<LeaveType> FindAll()
