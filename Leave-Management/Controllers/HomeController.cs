@@ -1,4 +1,5 @@
 ﻿using Leave_Management.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,14 +13,15 @@ namespace Leave_Management.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserManager<IdentityUser> _userManager;
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
         {
+            _userManager = userManager;
             _logger = logger;
         }
 
         public IActionResult Index()
-        {
+        {          
             return View();
         }
 

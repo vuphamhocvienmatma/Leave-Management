@@ -124,9 +124,8 @@ namespace Leave_Management.Controllers
             if (_repo.isExsits(id))
             {
                 var oldmodel = _repo.FindById(id);
-                var model = _mapper.Map<LeaveType>(oldmodel);
-                _repo.Delete(model);
-                return RedirectToAction(nameof(Index));
+                var model = _mapper.Map<LeaveTypeVM>(oldmodel);             
+                return View(model);
             }
             else
                 return NotFound();
@@ -135,15 +134,24 @@ namespace Leave_Management.Controllers
         // POST: LeaveTypesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, LeaveTypeVM model)
         {
             try
-            {
-                return RedirectToAction(nameof(Index));
+            {               
+                var leaveType = _repo.FindById(id);
+                if (leaveType == null)
+                    return NotFound();
+                var isSuccess = _repo.Delete(leaveType);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Something went Wrong ...");
+                }
+                return View(model);
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Something went Wrong ...");
+                return View(model);
             }
         }
     }
