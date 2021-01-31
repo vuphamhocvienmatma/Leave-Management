@@ -1,5 +1,6 @@
 ﻿using Leave_Management.Contracts;
 using Leave_Management.Data;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace Leave_Management.Repository
         public LeaveAllocation FindById(int id)
         {
             return _db.LeaveAllocations.FirstOrDefault(o => o.Id == id);
+        }
+
+        public bool isExsits(int id)
+        {
+            return _db.LeaveAllocations.Any(q => q.Id == id);
         }
 
         public bool Save()

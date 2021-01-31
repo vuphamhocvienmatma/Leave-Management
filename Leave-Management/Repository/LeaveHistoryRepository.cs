@@ -37,6 +37,11 @@ namespace Leave_Management.Repository
             return _db.LeaveHistorys.FirstOrDefault(o => o.Id == id);
         }
 
+        public bool isExsits(int id)
+        {
+            return _db.LeaveHistorys.Any(q => q.Id == id);
+        }
+
         public bool Save()
         {
             int chage = _db.SaveChanges();
