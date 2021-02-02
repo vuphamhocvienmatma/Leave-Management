@@ -23,5 +23,7 @@ namespace Leave_Management.Models
 
         public IEnumerable<SelectListItem> Employees { get; set; }
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
+
+        public int Period { get; set; }
     }
 }

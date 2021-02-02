@@ -15,5 +15,10 @@ namespace Leave_Management.Models
 
         [Display(Name ="Ngày tạo")]
         public DateTime? DateCreated { get; set; }
+
+        [Display(Name = "Ngày được hưởng")]
+        [Required]
+        [Range(1,25,ErrorMessage ="Please Enter a vaild number")]
+        public int DefaultDays { get; set; }
     }
 }
